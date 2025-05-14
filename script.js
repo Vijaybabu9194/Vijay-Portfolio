@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menuToggle.addEventListener("click", () => {
         menuToggle.classList.toggle("active")
         nav.classList.toggle("active")
+        body.classList.toggle("menu-open")
     })
 
     // Close mobile menu when clicking on a link
@@ -110,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
         link.addEventListener("click", () => {
             menuToggle.classList.remove("active")
             nav.classList.remove("active")
+            body.classList.remove("menu-open")
         })
     })
 
