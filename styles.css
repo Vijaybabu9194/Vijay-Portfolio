@@ -719,7 +719,7 @@ section {
 }
 
 .project-card {
-  height: 300px;
+  height: 400px;
   perspective: 1000px;
   opacity: 0;
   transform: translateY(30px);
