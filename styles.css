@@ -260,9 +260,15 @@ nav ul li a.active::after {
   display: block;
   width: 100%;
   text-align: left;
-  color: var(--light-text);
+  color: var(--text-color);
+  /* Changed from var(--light-text) to var(--text-color) for better visibility on white background */
   opacity: 1;
   visibility: visible;
+}
+
+/* Add specific styling for dark mode */
+body.dark-mode .hero h1.glitch {
+  color: var(--light-text);
 }
 
 /* Improve the name animation */
@@ -1690,7 +1696,13 @@ body.dark-mode .theme-toggle {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    color: var(--text-color) !important;
+    /* Ensure text is visible in mobile view */
+  }
+
+  body.dark-mode .hero h1.glitch {
     color: var(--light-text) !important;
+    /* Ensure text is visible in dark mode */
   }
 
   .hero .name {
