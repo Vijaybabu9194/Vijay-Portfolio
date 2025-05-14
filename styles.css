@@ -1186,7 +1186,7 @@ section {
 }
 
 .certification-image {
-  height: 180px;
+  height: 300px;
   overflow: hidden;
 }
 
@@ -1872,4 +1872,39 @@ body.dark-mode .theme-toggle {
   .hero {
     padding-top: 80px;
   }
+}
+
+/* Add this to your existing CSS file */
+
+.form-status {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  font-weight: 500;
+  transition: var(--transition);
+  display: none;
+}
+
+.form-status.success {
+  display: block;
+  background-color: rgba(67, 206, 162, 0.1);
+  color: #43cea2;
+  border: 1px solid #43cea2;
+}
+
+.form-status.error {
+  display: block;
+  background-color: rgba(255, 101, 132, 0.1);
+  color: #ff6584;
+  border: 1px solid #ff6584;
+}
+
+/* Dark mode support */
+body.dark-mode .form-status.success {
+  background-color: rgba(67, 206, 162, 0.2);
+}
+
+body.dark-mode .form-status.error {
+  background-color: rgba(255, 101, 132, 0.2);
 }

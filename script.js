@@ -252,29 +252,64 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    // Form submission
-    const contactForm = document.getElementById("contactForm")
+    // Initialize EmailJS
+    (function () {
+        emailjs.init("aRnx9y9_PiFDNjoSj"); // Replace with your EmailJS user ID
+    })();
 
-    if (contactForm) {
-        contactForm.addEventListener("submit", (e) => {
-            e.preventDefault()
+    // Form submission with EmailJS
+    const contactFormElement = document.getElementById("contactForm");
+    const formStatus = document.getElementById("form-status");
+
+    if (contactFormElement) {
+        contactFormElement.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            // Show loading state
+            const submitBtn = contactFormElement.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = "Sending...";
+            submitBtn.disabled = true;
 
             // Get form values
-            const name = document.getElementById("name").value
-            const email = document.getElementById("email").value
-            const subject = document.getElementById("subject").value
-            const message = document.getElementById("message").value
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const subject = document.getElementById("subject").value;
+            const message = document.getElementById("message").value;
 
-            // Here you would typically send the form data to a server
-            // For demo purposes, we'll just log it to the console
-            console.log("Form submitted:", { name, email, subject, message })
+            // Prepare template parameters
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_name: "Vijay Babu Arumilli" // Your name
+            };
 
-            // Show success message (in a real application)
-            alert("Thank you for your message! I will get back to you soon.")
+            // Send email using EmailJS
+            emailjs.send('service_kkl4mob', 'template_h44inwd', templateParams) // Replace with your service and template IDs
+                .then(function (response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    formStatus.textContent = "Thank you for your message! I will get back to you soon.";
+                    formStatus.className = "form-status success";
+                    contactFormElement.reset();
+                }, function (error) {
+                    console.log('FAILED...', error);
+                    formStatus.textContent = "Oops! Something went wrong. Please try again later.";
+                    formStatus.className = "form-status error";
+                })
+                .finally(() => {
+                    // Reset button state
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
 
-            // Reset form
-            contactForm.reset()
-        })
+                    // Clear status message after 5 seconds
+                    setTimeout(() => {
+                        formStatus.textContent = "";
+                        formStatus.className = "form-status";
+                    }, 5000);
+                });
+        });
     }
 
     // Call animation functions on scroll
